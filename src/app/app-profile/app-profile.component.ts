@@ -9,8 +9,7 @@ import { Component } from '@angular/core';
 export class AppProfileComponent {
 
   isVoiceDemo: boolean = false;
-  bottomIcons: string[] = ['microphone', 'message-circle', 'phone-call', 'mail', 'hand'];
-  leftIcons: string[] = ['📷', '🎥', '🔊', '🧑‍🤝‍🧑'];
+  bottomIcons: string[] = ['/assets/img/icons/call.png', '/assets/img/icons/mute.png', '/assets/img/icons/end-call.png'];
   otherAgents: string[] = [
     'https://randomuser.me/api/portraits/women/45.jpg',
     'https://randomuser.me/api/portraits/women/54.jpg',

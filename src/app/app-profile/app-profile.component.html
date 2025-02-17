@@ -1,76 +1,46 @@
 <!-- profile.component.html -->
-<div class="relative flex items-center justify-center p-6 bg-white border border-gray-200 rounded-2xl shadow-xl h-[500px] w-[1000px]"> <!-- Increased width -->
-    <!-- Left Section: Customer Info -->
-    <div class="absolute top-6 left-6">
-      <h2 class="font-bold text-xl text-gray-900">Alex</h2>
-      <p class="text-sm text-gray-600">Customer Support: Healthcare</p>
-    </div>
-  
-    <!-- Center: Avatar with controls -->
-    <div class="flex flex-col items-center mx-auto">
-      <div class="relative">
-        <img
-          src="https://randomuser.me/api/portraits/women/44.jpg"
-          alt="Alex"
-          class="w-48 h-48 rounded-full border-4 border-gray-300 shadow-lg object-cover"
-        />
-        <div class="absolute top-48 left-1/2 transform -translate-x-1/2">
-          <button
-            (click)="handleVoiceDemoClick()"
-            class="flex items-center justify-center w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <line x1="12" x2="12" y1="19" y2="22" />
-            </svg>
-          </button>
-        </div>
-        <div class="absolute top-75 text-sm text-gray-500 w-full text-center">Click avatar to start voice demo</div>
-      </div>
-  
-      <!-- Bottom controls -->
-      <div class="absolute top-98 flex space-x-4 mt-4">
-        <button *ngFor="let icon of bottomIcons" (click)="handleIconClick(icon)" class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full shadow hover:bg-gray-200">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="16" x2="12" y2="12" />
-            <line x1="12" y1="8" x2="12" y2="8" />
-          </svg>
+<div class="demo-container mt-4">
+  <!-- Increased width -->
+  <!-- Left Section: Customer Info -->
+  <div class="nameNindutry-container">
+    <h2 class="voiceName">Alex Murthy</h2>
+    <p class="industryText">Customer Support: <span> Healthcare</span></p>
+  </div>
+
+  <!-- Center: Avatar with controls -->
+  <div class="flex flex-col items-center my-6 mx-auto">
+    <div class="relative">
+      <!-- avatar Image -->
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Alex"
+        class="w-40 h-40 flex align-center justify-center rounded-full border-4 border-gray-300 shadow-lg object-cover" />
+      <div class="mx-auto flex justify-center my-4">
+        <!-- active Btn -->
+        <button (click)="handleVoiceDemoClick()"
+          class="flex items-center justify-center w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600">
+          <i class="fa-solid " [ngClass]="3>2 ? 'fa-play' : 'fa-pause'"></i>
         </button>
       </div>
     </div>
-  
-    <!-- Left controls -->
-    <div class="absolute bottom-6 left-6 flex flex-col space-y-4">
-      <button *ngFor="let icon of leftIcons" class="flex items-center justify-center w-12 h-12 bg-black text-white rounded-full shadow-md hover:bg-gray-800">
-        <span class="text-xl">{{icon}}</span>
-      </button>
+
+    <!-- Bottom controls -->
+    <div class="flex items-center gap-2 flex-wrap">
+      <!-- <button *ngFor="let icon of bottomIcons" (click)="handleIconClick(icon)"
+        class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full shadow hover:bg-gray-200">
+        {bottomIcons | json}
+        <img [src]={icon} alt="...">
+      </button> -->
+      <button class="icon-container-wrapper"><span class="icon-container call-icon"></span></button>
+      <button class="icon-container-wrapper"><span class="icon-container mute-icon"></span></button>
+      <button class="icon-container-wrapper"><span class="icon-container end-call-icon"></span></button>
     </div>
-  
-    <!-- Right Section: Other Agents -->
-    <div class="absolute bottom-6 right-6 flex flex-col space-y-4">
-      <div *ngFor="let img of otherAgents" class="flex flex-col items-center">
-        <img [src]="img" alt="Agent" class="w-12 h-12 rounded-full border-2 border-gray-200" />
-      </div>
+
+  </div>
+
+  <!-- Right Section: Other Agents -->
+  <div class="absolute right-0 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-2 flex flex-col">
+    <img src="https://demo.gigaml.net/_next/static/media/SwapAgent.ab5b3fc7.svg" alt="..." class="voiceChange">
+    <div *ngFor="let img of otherAgents" class="flex flex-col items-center">
+      <img [src]="img" alt="Agent" class="w-12 h-12 rounded-full border-2 border-gray-200 hover:scale-115 cursor-pointer duration-300 ease-in-out" />
     </div>
   </div>
-  
+</div>

@@ -1,2 +1,108 @@
 @import "tailwindcss";
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --borderColor: #747474;
+    --borderColor-light: rgba(255, 255, 255, 0.4);
+    --textColor: #242424;
+    --bgGradient-pri: linear-gradient(180deg, #6850FF 0%, #AB69FE 100%);
+}
+
+body {
+    background: var(--bgGradient-pri);
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: repeat;
+    overflow: auto;
+}
+
+.demo-container {
+    border: 1px solid var(--borderColor-light);
+    border-radius: 16px;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(10px);
+    position: relative;
+    height: fit-content;
+    margin-top: 32px;
+}
+
+
+.nameNindutry-container {
+    width: fit-content;
+    padding-right: 10px;
+}
+
+.voiceName {
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.industryText {
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    margin-top: -7px;
+
+    span {
+        color: #fff;
+        font-weight: 500;
+    }
+}
+
+.voiceChange {
+    width: 28px;
+    height: 28px;
+    margin: auto;
+
+}
+
+
+.icon-container-wrapper {
+    --icon-width: 18px;
+    width: calc(var(--icon-width) + 24px);
+    height: calc(var(--icon-width) + 24px);
+    border-radius: 99rem;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 3s ease-in-out;
+
+    &:hover {
+        background: var(--bgGradient-pri);
+
+        .icon-container {
+            scale: 1.1;
+        }
+    }
+
+
+    .icon-container {
+        position: relative;
+        display: block;
+        width: var(--icon-width);
+        height: var(--icon-width);
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: contain !important;
+
+    }
+}
+
+.call-icon {
+    background: url(../src/assets/img/icons/call.png);
+}
+
+.mute-icon {
+    background: url(../src/assets/img/icons/mute.png);
+}
+
+.end-call-icon {
+    background: url(../src/assets/img/icons/end-call.png);
+}

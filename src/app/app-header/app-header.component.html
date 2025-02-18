@@ -1,46 +1,13 @@
 <div class="max-w-[800px] mx-auto mt-2">
   <div class="grid-autofit">
-
-    <div class="icon-container"
-      [ngClass]="{'border-2 bg-gray-100 border-gray-300': selectedItem === 'Hotel', 'bg-white': selectedItem !== 'Hotel'}"
-      (click)="onItemClick('Hotel')">
-      <i class="fa-solid fa-hotel"></i>
-      <span class="ml-2 text-xs md:text-sm">Hotel</span>
-    </div>
-
-    <div class="icon-container"
-      [ngClass]="{'border-2 bg-gray-100 border-gray-300': selectedItem === 'E-commerce and Retail', 'bg-white': selectedItem !== 'E-commerce and Retail'}"
-      (click)="onItemClick('E-commerce and Retail')">
-      <i class="fa-solid fa-shop"></i>
-      <span class="ml-2 text-xs md:text-sm">E-commerce and Retail</span>
-    </div>
-
-    <div class="icon-container"
-      [ngClass]="{'border-2 bg-gray-100 border-gray-300': selectedItem === 'Financial Services', 'bg-white': selectedItem !== 'Financial Services'}"
-      (click)="onItemClick('Financial Services')">
-      <i class="fa-solid fa-building-columns"></i>
-      <span class="ml-2 text-xs md:text-sm">Financial Services</span>
-    </div>
-
-    <div class="icon-container"
-      [ngClass]="{'border-2 bg-gray-100 border-gray-300': selectedItem === 'Telecommunications', 'bg-white': selectedItem !== 'Telecommunications'}"
-      (click)="onItemClick('Telecommunications')">
-      <i class="fa-solid fa-tower-cell"></i>
-      <span class="ml-2 text-xs md:text-sm">Telecommunications</span>
-    </div>
-
-    <div class="icon-container"
-      [ngClass]="{'border-2 bg-gray-100 border-gray-300': selectedItem === 'Insurance', 'bg-white': selectedItem !== 'Insurance'}"
-      (click)="onItemClick('Insurance')">
-      <i class="fa-solid fa-building-shield"></i>
-      <span class="ml-2 text-xs md:text-sm">Insurance</span>
-    </div>
-
-    <div class="icon-container"
-      [ngClass]="{'border-2 bg-gray-100 border-gray-300': selectedItem === 'Healthcare', 'bg-white': selectedItem !== 'Healthcare'}"
-      (click)="onItemClick('Healthcare')">
-      <i class="fa-solid fa-hospital"></i>
-      <span class="ml-2 text-xs md:text-sm">Healthcare</span>
+    <div *ngFor="let item of items" class="icon-container"
+      [ngClass]="{
+        'border-2 bg-gray-100 border-gray-300': selectedItem.name === item.name,
+        'bg-white': selectedItem.name !== item.name
+      }"
+      (click)="onItemClick(item)">
+      <i class="fa-solid" [ngClass]="item.icon"></i>
+      <span class="ml-2 text-xs md:text-sm">{{ item.name }}</span>
     </div>
   </div>
 </div>

@@ -83,11 +83,10 @@ body {
 
 }
 
-
 .icon-container-wrapper {
-    --icon-width: 18px;
-    width: calc(var(--icon-width) + 24px);
-    height: calc(var(--icon-width) + 24px);
+    --icon-width: 46px;
+    width: calc(var(--icon-width));
+    height: calc(var(--icon-width));
     border-radius: 99rem;
     border: 1px solid #fff;
     display: flex;
@@ -101,14 +100,8 @@ body {
         scale: 1.1;
     }
 
-    .icon-container {
-        position: relative;
-        display: block;
-        width: var(--icon-width);
-        height: var(--icon-width);
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-size: contain !important;
+    i {
+        font-size: 18px;
     }
 
 }
@@ -116,18 +109,6 @@ body {
 .bg-gradient {
     color: #fff;
     background: var(--bgGradient-pri) !important;
-}
-
-.call-icon {
-    background: url(../src/assets/img/icons/call.png);
-}
-
-.mute-icon {
-    background: url(../src/assets/img/icons/mute.png);
-}
-
-.end-call-icon {
-    background: url(../src/assets/img/icons/end-call.png);
 }
 
 

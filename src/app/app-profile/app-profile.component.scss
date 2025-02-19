@@ -91,33 +91,225 @@
     background-position: center;
 }
 
-.ripple-container {
-    position: relative;
-    display: inline-block;
-}
 
-.ripple-container::before {
-    content: "";
+@mixin rings($duration, $delay) {
+    opacity: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
     height: 100%;
-    background: rgba(0, 123, 255, 0.4);
-    /* Adjust the color */
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    animation: ripple 1.5s infinite ease-out;
+    width: 100%;
+    border: 8px solid rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    animation-name: ripple;
+    animation-duration: $duration;
+    animation-delay: $delay;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.65, 0, .34, 1);
+    z-index: -1;
 }
 
-@keyframes ripple {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
+.request-loader {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    width: 160px;
+    border-radius: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+
+    span {
+        position: relative;
+        font-size: 72px;
+        top: 5px;
+        left: -5px;
     }
 
-    100% {
-        transform: translate(-50%, -50%) scale(1.2);
+    &::after {
+        @include rings(2s, 0s);
+    }
+
+    &::before {
+        @include rings(2s, 0.4s);
+    }
+}
+
+
+@keyframes ripple {
+    from {
+        opacity: 1;
+        transform: scale3d(0.75, 0.75, 1);
+    }
+
+    to {
         opacity: 0;
+        transform: scale3d(1.5, 1.5, 1);
+    }
+}
+
+
+
+
+// chat box UI
+.chat-container {
+    // width: 400px;
+    // background: white;
+    // border-radius: 15px;
+    // box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: calc(100vh - 240px);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 8px;
+        background-color: #e7e7e7;
+        border: 1px solid #cacaca;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background-color: #242424;
+    }
+}
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 70%;
+    font-size: 14px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.sender {
+    background: #4facfe;
+    color: white;
+    align-self: flex-end;
+}
+
+.receiver {
+    background: #e0e0e0;
+    color: black;
+    align-self: flex-start;
+}
+
+.bot-img,
+.noUser-img {
+    --img-width: 32px;
+    width: var(--img-width);
+    height: var(--img-width);
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+    border-radius: 99rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .8);
+}
+
+.noUser-img {
+    background: url('../../assets/img/blank-user.png');
+}
+
+.gradient-box {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 15px;
+    margin: auto;
+    opacity: 1;
+    max-width: fit-content;
+
+    position: relative;
+    box-sizing: border-box;
+    $border: 1px;
+    color: #6850FF;
+    background: #fff;
+    background-clip: padding-box;
+    /* !importanté */
+    border: solid $border transparent;
+    /* !importanté */
+    border-radius: 99rem;
+    cursor: pointer;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        margin: -$border;
+        /* !importanté */
+        border-radius: inherit;
+        /* !importanté */
+        background: var(--bgGradient-pri);
+    }
+}
+
+.nonActive-gradient-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 15px;
+    margin: auto;
+    opacity: 1;
+    /* Reduce opacity to indicate inactivity */
+    max-width: fit-content;
+
+    position: relative;
+    box-sizing: border-box;
+    $border: 1px;
+    color: #9E9E9E;
+    /* Faded color for inactive state */
+    background: #fff;
+    /* Light grey background */
+    background-clip: padding-box;
+    border: solid $border transparent;
+    border-radius: 99rem;
+    pointer-events: none;
+    /* Disables interactions */
+    cursor: not-allowed !important;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        margin: -$border;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #D6D2CE, #ECE8E4);
+        /* Dull gradient */
     }
 }

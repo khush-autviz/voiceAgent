@@ -10,34 +10,40 @@
 
       <!-- Center: Avatar with controls -->
       <div class="flex flex-col items-center mb-3 mx-auto " style="margin-top: 48px;">
-        <div class="relative mb-6">
+        <div class="relative mb-6 flex justify-content flex-col items-center">
           <!-- Avatar Image -->
-          <div [ngClass]="{'ripple-container' :transcript }">
+          <div [ngClass]="{'request-loader' : !transcript }">
             <img [src]="selectedAgent.img" [alt]="selectedAgent.name"
               class="w-40 h-40 flex align-center justify-center rounded-full border-4 border-gray-300 shadow-lg object-cover z-10 relative" />
+          </div>
+
+          <div *ngIf="!isLoading" class="mt-4 rounded-full bg-gray-50 shadow-sm border border-gray-200 px-4 py-2"
+            style="letter-spacing: 0.2px; box-shadow: rgba(128, 255, 204, 0.2) 0px 0px 8px 0.5px; min-width: 82px; opacity: 1; transform: none;height:fit-content;">
+            <p class="whitespace-nowrap text-sm text-gray-500">
+              Click call button to start voice demo</p>
           </div>
           <div *ngIf="isLoading" class="connecting mx-auto mt-4"></div>
         </div>
         <!-- Controls -->
         <div class="flex items-center gap-2 flex-wrap">
-          <button class="icon-container-wrapper" (click)="handleCall()"><span
-              class="icon-container call-icon"></span></button>
-          <button class="icon-container-wrapper" (click)="handleMute()"><span
-              class="icon-container mute-icon"></span></button>
-          <button class="icon-container-wrapper" (click)="handleCallEnd()"><span
-              class="icon-container end-call-icon"></span></button>
+          <button class="gradient-box" (click)="handleCall()">
+            <i class="fa-solid fa-phone"></i></button>
+          <button [ngClass]="4 > 2 ? 'nonActive-gradient-box' : 'gradient-box'" (click)="handleMute()">
+            <i class="fa-solid fa-microphone"></i></button>
+          <button [ngClass]="4 > 2 ? 'nonActive-gradient-box' : 'gradient-box'" (click)="handleCallEnd()">
+            <i class="fa-solid fa-phone-slash"></i></button>
         </div>
       </div>
 
       <!-- left Section: Other Agents -->
       <div class="absolute gap-2 flex flex-col" style="top: 32%;">
         <!-- <img src="https://demo.gigaml.net/_next/static/media/SwapAgent.ab5b3fc7.svg" alt="..." class="voiceChange"> -->
-        <!-- <div *ngFor="let agent of otherAgents" class="flex flex-col items-center">
+        <div *ngFor="let agent of otherAgents" class="flex flex-col items-center">
           <img [src]="agent.img" [alt]="agent.name"
             class="w-11 h-11 rounded-full border-2 border-gray-200 hover:scale-110 cursor-pointer duration-300 ease-in-out object-cover"
             (click)="changeAgent(agent)" />
           <p class="text-[10px] mt-1 font-bold">{{ agent.name }}</p>
-        </div> -->
+        </div>
       </div>
     </div>
 
@@ -45,22 +51,23 @@
 
 
 
-      <div *ngIf="!isLoading && !transcript" class="flex justify-center flex-col items-center h-full w-full">
+      <div *ngIf="!isLoading" class="flex justify-center flex-col items-center h-full w-full">
         <div class="callmsg-icon"></div>
         <h1 class="text-slate-700 text-xl font-semibold">Click on Call Button</h1>
       </div>
 
-      <!-- <div *ngIf="transcript">
-        <h3 class="text-lg font-semibold mb-2">Live Transcript:</h3>
-         Display the dynamically updated transcript -->
-
-        
-      <!-- </div> -->
-
-      <div *ngFor="let item of transcript">
-        <p><strong>{{ item?.role }}:</strong> {{ item?.content }}</p>
+      <div class="chat-container">
+        <div class="chat-box my-2" *ngFor="let item of transcript">
+          <div class="sender-box flex gap-3">
+            <div class="bot-img" [ngStyle]="{'background-image': 'url(' + selectedAgent.img + ')'}"></div>
+            <div class="message sender">{{item?.content}}</div>
+          </div>
+          <div class="receiver-box flex gap-3">
+            <div class="message receiver">{{ item?.role }}</div>
+            <div class="noUser-img"></div>
+          </div>
+        </div>
       </div>
-
 
 
       <!-- skelton view -->

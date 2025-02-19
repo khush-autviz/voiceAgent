@@ -1,0 +1,13 @@
+.gradient-color::after {
+    content: "";
+    position: absolute;
+    background: #8C6BFF;
+    border-radius: 100%;
+    filter: blur(120px);
+    opacity: 0.6;
+    width: 200px;
+    height: 200px;
+    z-index: 5;
+    bottom: 0;
+    left: 0;
+}

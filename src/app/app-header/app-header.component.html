@@ -1,13 +1,13 @@
-<div class="max-w-[800px] mx-auto mt-2">
-  <div class="grid-autofit">
-    <div *ngFor="let item of items" class="icon-container"
-      [ngClass]="{
-        'border-2 bg-gray-100 border-gray-300': selectedItem.name === item.name,
+<div class="container mx-auto px-4">
+  <div class=" my-4 z-10 relative">
+    <div class="grid-autofit">
+      <div *ngFor="let item of items" class="icon-container" [ngClass]="{
+        'bg-gradient': selectedItem.name === item.name,
         'bg-white': selectedItem.name !== item.name
-      }"
-      (click)="onItemClick(item)">
-      <i class="fa-solid" [ngClass]="item.icon"></i>
-      <span class="ml-2 text-xs md:text-sm">{{ item.name }}</span>
+      }" (click)="onItemClick(item)">
+        <i class="fa-solid" [ngClass]="item.icon"></i>
+        <span class="ml-2 text-xs md:text-sm">{{ item.name }}</span>
+      </div>
     </div>
   </div>
 </div>

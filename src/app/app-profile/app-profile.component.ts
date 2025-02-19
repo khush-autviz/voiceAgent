@@ -23,7 +23,7 @@ export class AppProfileComponent implements OnInit {
   isMuted: boolean = false;
   transcript: string = '';
   otherAgents = [
-    { name: 'Marissa Johnson', img: 'https://randomuser.me/api/portraits/women/45.jpg' },
+    { name: 'Marissa Johnson', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1522&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
     // { name: 'Olivia Smith', img: 'https://randomuser.me/api/portraits/women/54.jpg' },
     // { name: 'Liam Brown', img: 'https://randomuser.me/api/portraits/men/13.jpg' },
     // { name: 'Noah Wilson', img: 'https://randomuser.me/api/portraits/men/33.jpg' }
@@ -32,7 +32,7 @@ export class AppProfileComponent implements OnInit {
   selectedAgent = this.otherAgents[0];
   selectedIndustry: Industry = { name: 'Hotel', id: 'agent_721a7d8ecd6e74a524653eaac7', icon: 'fa-hotel' }; // Default industry
 
-  constructor(private http: HttpClient, private industryService: IndustryService) {}
+  constructor(private http: HttpClient, private industryService: IndustryService) { }
 
   ngOnInit(): void {
     this.industryService.selectedIndustry$.subscribe((industry: Industry) => {
@@ -85,18 +85,18 @@ export class AppProfileComponent implements OnInit {
   handleCall(): void {
     const apiUrl = 'http://localhost:8000/call';
     const agentId = this.selectedIndustry.id; // Ensure this is the correct agent ID
-    
+
     // Send agent_id as the key in the request data
     const requestData = {
       agent_id: agentId // Update the key to `agent_id`
     };
 
     this.isLoading = true
-  
+
     this.http.post<{ accessToken: string }>(apiUrl, requestData).subscribe(
       (response) => {
         const accessToken = response.accessToken;
-  
+
         const demoStartCallConfig: StartCallConfig = {
           accessToken: accessToken,
           sampleRate: 48000,
@@ -105,9 +105,9 @@ export class AppProfileComponent implements OnInit {
           emitRawAudioSamples: true
         };
 
-        
+
         sdk.startCall(demoStartCallConfig).then(() => {
-          this.isLoading =false
+          this.isLoading = false
           console.log('Call started successfully');
           sdk.on("update", (update) => {
             this.transcript = update.transcript.map((item: any) => `${item.role}: ${item.content}`).join('\n');
@@ -122,7 +122,7 @@ export class AppProfileComponent implements OnInit {
       }
     );
   }
-  
+
 
   handleCallEnd(): void {
     console.log("Call ended");

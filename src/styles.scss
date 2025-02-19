@@ -8,27 +8,51 @@
 }
 
 body {
-    background: var(--bgGradient-pri);
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-repeat: repeat;
-    overflow: auto;
+    // BG Screen
+    background-color: #F7FAFC;
+    // font styling
+    color: #2d3748;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: "";
+        background: #8C6BFF;
+        border-radius: 100%;
+        filter: blur(200px);
+        opacity: 0.2;
+        width: 200px;
+        height: 200px;
+        z-index: 5;
+    }
+
+    &::before {
+        top: 10%;
+        left: 0;
+    }
+
+    &::after {
+        bottom: 10%;
+        right: 0;
+    }
+
 }
 
 .demo-container {
     border: 1px solid var(--borderColor-light);
     border-radius: 16px;
-    max-width: 800px;
-    margin: auto;
     padding: 20px;
-    background: rgba(255, 255, 255, .5);
-    backdrop-filter: blur(10px);
+    background-color: #fff;
+    // margin: auto;
+    // background-color: #F0EFFF;
     position: relative;
-    height: fit-content;
-    margin-top: 32px;
+    z-index: 10;
+    height: 100%;
 }
-
 
 .nameNindutry-container {
     width: fit-content;
@@ -36,21 +60,18 @@ body {
 }
 
 .voiceName {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
-    color: #fff;
     text-transform: capitalize;
     margin: 0;
 }
 
 .industryText {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
-    color: #fff;
     margin-top: -7px;
 
     span {
-        color: #fff;
         font-weight: 500;
     }
 }
@@ -72,16 +93,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 3s ease-in-out;
+    background: var(--bgGradient-pri);
+    transition: all .6s ease-in-out;
+    scale: 1;
 
     &:hover {
-        background: var(--bgGradient-pri);
-
-        .icon-container {
-            scale: 1.1;
-        }
+        scale: 1.1;
     }
-
 
     .icon-container {
         position: relative;
@@ -91,8 +109,13 @@ body {
         background-repeat: no-repeat !important;
         background-position: center !important;
         background-size: contain !important;
-
     }
+
+}
+
+.bg-gradient {
+    color: #fff;
+    background: var(--bgGradient-pri) !important;
 }
 
 .call-icon {

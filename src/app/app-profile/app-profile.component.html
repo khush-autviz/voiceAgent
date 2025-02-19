@@ -1,51 +1,60 @@
-<div class="demo-container mt-4">
-  <!-- Left Section: Customer Info -->
-  <div class="nameNindutry-container">
-    <h2 class="voiceName">{{ selectedAgent.name }}</h2>
-    <p class="industryText">Customer Support: <span>{{ selectedIndustry.name }}</span></p> <!-- Updated this line -->
-  </div>
+<div class="container mx-auto px-4 z-10">
+  <div class="grid grid-cols-12 gap-2 mt-2">
+    <div class="demo-container col-span-8 w-full">
+      <!-- Left Section: Customer Info -->
+      <div class="nameNindutry-container">
+        <h2 class="voiceName">{{ selectedAgent.name }}</h2>
+        <p class="industryText">Customer Support: <span>{{ selectedIndustry.name }}</span></p>
+        <!-- Updated this line -->
+      </div>
 
-  <!-- Center: Avatar with controls -->
-  <div class="flex flex-col items-center my-6 mx-auto">
-    <div class="relative">
-      <!-- Avatar Image -->
-      <img [src]="selectedAgent.img" [alt]="selectedAgent.name"
-        class="w-40 h-40 flex align-center justify-center rounded-full border-4 border-gray-300 shadow-lg object-cover" />
-      <!-- <div class="mx-auto flex justify-center my-4"> -->
-        <!-- Play/Pause Button -->
-        <!-- <button (click)="handleVoiceDemoClick()"
+      <!-- Center: Avatar with controls -->
+      <div class="flex flex-col items-center mb-3 mx-auto" style="margin-top: 48px;">
+        <div class="relative">
+          <!-- Avatar Image -->
+          <img [src]="selectedAgent.img" [alt]="selectedAgent.name"
+            class="w-40 h-40 flex align-center justify-center rounded-full border-4 border-gray-300 shadow-lg object-cover" />
+          <!-- <div class="mx-auto flex justify-center my-4"> -->
+          <!-- Play/Pause Button -->
+          <!-- <button (click)="handleVoiceDemoClick()"
           class="flex items-center justify-center w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600">
           <i class="fa-solid" [ngClass]="isVoiceDemo ? 'fa-pause' : 'fa-play'"></i>
         </button> -->
-      <!-- </div> -->
+          <!-- </div> -->
+        </div>
+        <!-- Bottom Controls -->
+        <div class="flex items-center gap-2 flex-wrap mt-6">
+          <button class="icon-container-wrapper" (click)="handleCall()"><span
+              class="icon-container call-icon"></span></button>
+          <button class="icon-container-wrapper" (click)="handleMute()"><span
+              class="icon-container mute-icon"></span></button>
+          <button class="icon-container-wrapper" (click)="handleCallEnd()"><span
+              class="icon-container end-call-icon"></span></button>
+        </div>
+      </div>
+
+      <!-- left Section: Other Agents -->
+      <div class="absolute top-[32%] gap-2 flex flex-col">
+        <!-- <img src="https://demo.gigaml.net/_next/static/media/SwapAgent.ab5b3fc7.svg" alt="..." class="voiceChange"> -->
+        <div *ngFor="let agent of otherAgents" class="flex flex-col items-center">
+          <img [src]="agent.img" [alt]="agent.name"
+            class="w-11 h-11 rounded-full border-2 border-gray-200 hover:scale-110 cursor-pointer duration-300 ease-in-out object-cover"
+            (click)="changeAgent(agent)" />
+          <p class="text-[10px] mt-1 font-bold">{{ agent.name }}</p>
+        </div>
+      </div>
     </div>
 
-    <div class="flex items-center gap-2 flex-wrap mt-2">
-      {{ isLoading? "Loading..." : ''}}
-    </div>
-    <!-- Bottom Controls -->
-    <div class="flex items-center gap-2 flex-wrap mt-5">
-      <button class="icon-container-wrapper" (click)="handleCall()"><span class="icon-container call-icon"></span></button>
-      <button class="icon-container-wrapper" (click)="handleMute()"><span class="icon-container mute-icon"></span></button>
-      <button class="icon-container-wrapper" (click)="handleCallEnd()"><span class="icon-container end-call-icon"></span></button>
-    </div>
+    <div class="md:ml-1 demo-container col-span-4 w-full relative overflow-hidden">
+      <div class="flex items-center gap-2 flex-wrap mt-2 gradient-color">
+        {{ isLoading? "Connecting..." : ''}}
 
-    <div *ngIf="transcript">
-      <h3>Live Transcript:</h3>
-      <pre>{{ transcript }}</pre>  <!-- Display the dynamically updated transcript -->
-    </div>
+      </div>
 
+      <div *ngIf="transcript">
+        <h3>Live Transcript:</h3>
+        <pre>{{ transcript }}</pre> <!-- Display the dynamically updated transcript -->
+      </div>
+    </div>
   </div>
-
-  <!-- Right Section: Other Agents -->
-  <div class="absolute right-0 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-2 flex flex-col">
-    <img src="https://demo.gigaml.net/_next/static/media/SwapAgent.ab5b3fc7.svg" alt="..." class="voiceChange">
-    <div *ngFor="let agent of otherAgents" class="flex flex-col items-center">
-      <img [src]="agent.img" [alt]="agent.name"
-        class="w-12 h-12 rounded-full border-2 border-gray-200 hover:scale-110 cursor-pointer duration-300 ease-in-out"
-        (click)="changeAgent(agent)" />
-      <p class="text-xs mt-1">{{ agent.name }}</p>
-    </div>
-  </div>
-  
 </div>

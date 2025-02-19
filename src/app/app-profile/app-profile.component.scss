@@ -90,3 +90,34 @@
     background-size: contain;
     background-position: center;
 }
+
+.ripple-container {
+    position: relative;
+    display: inline-block;
+}
+
+.ripple-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 123, 255, 0.4);
+    /* Adjust the color */
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: ripple 1.5s infinite ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+    }
+}

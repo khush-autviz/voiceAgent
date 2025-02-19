@@ -21,7 +21,7 @@ export class AppProfileComponent implements OnInit {
     'assets/img/icons/end-call.png'
   ];
   isMuted: boolean = false;
-  transcript: string = '';
+  transcript: { role: string, content: string }[] = [];
   otherAgents = [
     { name: 'Marissa Johnson', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1522&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
     // { name: 'Olivia Smith', img: 'https://randomuser.me/api/portraits/women/54.jpg' },
@@ -49,6 +49,8 @@ export class AppProfileComponent implements OnInit {
     this.selectedAgent = agent;
     console.log('Agent changed to:', agent.name);
   }
+
+  
 
   // handleCall(): void {
   //   const apiUrl = 'http://localhost:8000/call';
@@ -110,7 +112,10 @@ export class AppProfileComponent implements OnInit {
           this.isLoading = false
           console.log('Call started successfully');
           sdk.on("update", (update) => {
-            this.transcript = update.transcript.map((item: any) => `${item.role}: ${item.content}`).join('\n');
+            this.transcript = update.transcript.map((item: any) => ({
+              role: item.role,
+              content: item.content
+            }));
             console.log("Live Transcript:", this.transcript);
           });
         }).catch(error => {

@@ -12,8 +12,10 @@
       <div class="flex flex-col items-center mb-3 mx-auto " style="margin-top: 48px;">
         <div class="relative mb-6">
           <!-- Avatar Image -->
-          <img [src]="selectedAgent.img" [alt]="selectedAgent.name"
-            class="w-40 h-40 flex align-center justify-center rounded-full border-4 border-gray-300 shadow-lg object-cover" />
+          <div [ngClass]="{'ripple-container' :transcript }">
+            <img [src]="selectedAgent.img" [alt]="selectedAgent.name"
+              class="w-40 h-40 flex align-center justify-center rounded-full border-4 border-gray-300 shadow-lg object-cover z-10 relative" />
+          </div>
           <div *ngIf="isLoading" class="connecting mx-auto mt-4"></div>
         </div>
         <!-- Controls -->
@@ -30,12 +32,12 @@
       <!-- left Section: Other Agents -->
       <div class="absolute gap-2 flex flex-col" style="top: 32%;">
         <!-- <img src="https://demo.gigaml.net/_next/static/media/SwapAgent.ab5b3fc7.svg" alt="..." class="voiceChange"> -->
-        <div *ngFor="let agent of otherAgents" class="flex flex-col items-center">
+        <!-- <div *ngFor="let agent of otherAgents" class="flex flex-col items-center">
           <img [src]="agent.img" [alt]="agent.name"
             class="w-11 h-11 rounded-full border-2 border-gray-200 hover:scale-110 cursor-pointer duration-300 ease-in-out object-cover"
             (click)="changeAgent(agent)" />
           <p class="text-[10px] mt-1 font-bold">{{ agent.name }}</p>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -48,9 +50,15 @@
         <h1 class="text-slate-700 text-xl font-semibold">Click on Call Button</h1>
       </div>
 
-      <div *ngIf="transcript">
+      <!-- <div *ngIf="transcript">
         <h3 class="text-lg font-semibold mb-2">Live Transcript:</h3>
-        <p>{{ transcript }}</p> <!-- Display the dynamically updated transcript -->
+         Display the dynamically updated transcript -->
+
+        
+      <!-- </div> -->
+
+      <div *ngFor="let item of transcript">
+        <p><strong>{{ item?.role }}:</strong> {{ item?.content }}</p>
       </div>
 
 

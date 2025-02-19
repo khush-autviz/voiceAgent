@@ -9,21 +9,15 @@
       </div>
 
       <!-- Center: Avatar with controls -->
-      <div class="flex flex-col items-center mb-3 mx-auto" style="margin-top: 48px;">
-        <div class="relative">
+      <div class="flex flex-col items-center mb-3 mx-auto " style="margin-top: 48px;">
+        <div class="relative mb-6">
           <!-- Avatar Image -->
           <img [src]="selectedAgent.img" [alt]="selectedAgent.name"
             class="w-40 h-40 flex align-center justify-center rounded-full border-4 border-gray-300 shadow-lg object-cover" />
-          <!-- <div class="mx-auto flex justify-center my-4"> -->
-          <!-- Play/Pause Button -->
-          <!-- <button (click)="handleVoiceDemoClick()"
-          class="flex items-center justify-center w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600">
-          <i class="fa-solid" [ngClass]="isVoiceDemo ? 'fa-pause' : 'fa-play'"></i>
-        </button> -->
-          <!-- </div> -->
+          <div *ngIf="isLoading" class="connecting mx-auto mt-4"></div>
         </div>
-        <!-- Bottom Controls -->
-        <div class="flex items-center gap-2 flex-wrap mt-6">
+        <!-- Controls -->
+        <div class="flex items-center gap-2 flex-wrap">
           <button class="icon-container-wrapper" (click)="handleCall()"><span
               class="icon-container call-icon"></span></button>
           <button class="icon-container-wrapper" (click)="handleMute()"><span
@@ -34,7 +28,7 @@
       </div>
 
       <!-- left Section: Other Agents -->
-      <div class="absolute top-[32%] gap-2 flex flex-col">
+      <div class="absolute gap-2 flex flex-col" style="top: 32%;">
         <!-- <img src="https://demo.gigaml.net/_next/static/media/SwapAgent.ab5b3fc7.svg" alt="..." class="voiceChange"> -->
         <div *ngFor="let agent of otherAgents" class="flex flex-col items-center">
           <img [src]="agent.img" [alt]="agent.name"
@@ -46,14 +40,42 @@
     </div>
 
     <div class="md:ml-1 demo-container col-span-4 w-full relative overflow-hidden">
-      <div class="flex items-center gap-2 flex-wrap mt-2 gradient-color">
-        {{ isLoading? "Connecting..." : ''}}
-
+      <div *ngIf="transcript">
+        <h3 class="text-lg font-semibold mb-2">Live Transcript:</h3>
+        <p>{{ transcript }}</p> <!-- Display the dynamically updated transcript -->
       </div>
 
-      <div *ngIf="transcript">
-        <h3>Live Transcript:</h3>
-        <pre>{{ transcript }}</pre> <!-- Display the dynamically updated transcript -->
+
+      <!-- skelton view -->
+      <!-- hide when real chat follow's -->
+      <div *ngIf="isLoading" class="skeletonChat-container">
+        <!-- left chat -->
+        <section class="skeletonChat-chat gap-3">
+          <figure class="skeletonChat-chat-avatar skeletonChat-loading"></figure>
+          <div class="skeletonChat-chat-content">
+            <div class="skeletonChat-chat-text--small skeletonChat-loading"></div>
+            <div class="skeletonChat-chat-text--large skeletonChat-loading"></div>
+          </div>
+        </section>
+
+        <!-- right chat -->
+        <section class="skeletonChat-chat mt-6 gap-3">
+          <div class="skeletonChat-chat-content">
+            <div class="skeletonChat-chat-text--small ml-auto skeletonChat-loading"></div>
+            <!-- <div class="skeletonChat-chat-text--large skeletonChat-loading"></div> -->
+          </div>
+          <figure class="skeletonChat-chat-avatar skeletonChat-loading"></figure>
+        </section>
+
+        <!-- left chat -->
+        <section class="skeletonChat-chat mt-6 gap-3">
+          <figure class="skeletonChat-chat-avatar skeletonChat-loading"></figure>
+          <div class="skeletonChat-chat-content">
+            <div class="skeletonChat-chat-text--small  skeletonChat-loading"></div>
+            <div class="skeletonChat-chat-text--large skeletonChat-loading"></div>
+            <div class="skeletonChat-chat-text--small mt-1 skeletonChat-loading"></div>
+          </div>
+        </section>
       </div>
     </div>
   </div>

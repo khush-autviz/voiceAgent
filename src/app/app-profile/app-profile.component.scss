@@ -81,3 +81,12 @@
         transform: translateX(100%);
     }
 }
+
+.callmsg-icon {
+    background: url(../../assets/calling-line-art.png);
+    width: 320px;
+    height: 140px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}

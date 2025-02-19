@@ -40,10 +40,19 @@
     </div>
 
     <div class="md:ml-1 demo-container col-span-4 w-full relative overflow-hidden">
+
+
+
+      <div *ngIf="!isLoading && !transcript" class="flex justify-center flex-col items-center h-full w-full">
+        <div class="callmsg-icon"></div>
+        <h1 class="text-slate-700 text-xl font-semibold">Click on Call Button</h1>
+      </div>
+
       <div *ngIf="transcript">
         <h3 class="text-lg font-semibold mb-2">Live Transcript:</h3>
         <p>{{ transcript }}</p> <!-- Display the dynamically updated transcript -->
       </div>
+
 
 
       <!-- skelton view -->
